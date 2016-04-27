@@ -1,0 +1,6 @@
+{
+    "require": {
+        "efisuby/php-kafka": "^0.1.8",
+        "vanilla/garden-cli": "^1.6"
+    }
+}
