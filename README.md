@@ -1,5 +1,7 @@
 # phpkafka-example
-Script to show how kafka works
+Script to show how kafka works.
+
+Required to install [php-rdkafka](https://github.com/arnaud-lb/php-rdkafka)
 
 Usage
 ------------
