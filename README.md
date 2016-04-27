@@ -14,12 +14,38 @@ composer install
 Usage
 ------------
 ```
-php index.php 
 usage: index.php <command> [<options>]
 
 COMMANDS
   producer   Initialize producer
   consumer   Initialize consumer
+
+
+$ php index.php producer --help
+usage: index.php producer [<options>]
+
+Initialize producer
+
+OPTIONS
+  --count      Number of messages to put to queue
+  --help, -?   Display this help.
+  --message    Message to put to queue
+  --topic      Topic
+
+
+$ php index.php consumer --help
+usage: index.php consumer [<options>]
+
+Initialize consumer
+
+OPTIONS
+  --file            Name of file to write output
+  --frombeginning   Add --from-beginning flag to consumer
+  --help, -?        Display this help.
+  --output          Type of output - stdout, file, none
+  --topic           Topic
+  --wait            Wait for new messages, don't kill script after reading all
+                    messages
 ```
 
 Examples
