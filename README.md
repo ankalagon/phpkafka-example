@@ -42,7 +42,7 @@ OPTIONS
   --file            Name of file to write output
   --frombeginning   Add --from-beginning flag to consumer
   --help, -?        Display this help.
-  --output          Type of output - stdout, file, none
+  --output          Type of output - stdout, file, raw, none
   --topic           Topic
   --wait            Wait for new messages, don't kill script after reading all
                     messages

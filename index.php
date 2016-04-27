@@ -21,17 +21,15 @@ $cli->description('Tool to test Kafka Brokers/Zookeeper from PHP')
 
     ->command('consumer')
     ->description('Initialize consumer')
-    ->opt('output', 'Type of output - stdout, file, none', true, 'string')
+    ->opt('output', 'Type of output - stdout, file, raw, none', true, 'string')
     ->opt('file', 'Name of file to write output', false, 'string')
     ->opt('wait', 'Wait for new messages, don\'t kill script after reading all messages', false, 'boolean')
     ->opt('frombeginning', 'Add --from-beginning flag to consumer', false, 'string')
-    ->opt('topic', 'Topic', true, 'string')
-;
+    ->opt('topic', 'Topic', true, 'string');
 
 $args = $cli->parse($argv, true);
 
 $command = $args->getCommand();
-
 
 if ($command == 'producer') {
     $count = $args->getOpt('count', 1);
@@ -56,7 +54,7 @@ if ($command == 'producer') {
     $wait = $args->getOpt('wait', 0);
     $frombeginning = $args->getOpt('frombeginning', 0);
 
-    if (in_array($output, ['stdout', 'file', 'none']) == false) {
+    if (in_array($output, ['stdout', 'file', 'raw', 'none']) == false) {
         $log->error('Wrong type of output parameter, possible values: file, stdout');
         die();
     }
@@ -97,6 +95,8 @@ if ($command == 'producer') {
                 echo $msg->payload.PHP_EOL;
             } elseif ($output == 'file') {
                 file_put_contents($args->getOpt('file'), $msg->payload.PHP_EOL, FILE_APPEND);
+            } elseif ($output == 'raw') {
+                print_r($msg);
             }
         }
 
