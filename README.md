@@ -3,6 +3,14 @@ Script to show how kafka works.
 
 Required to install [php-rdkafka](https://github.com/arnaud-lb/php-rdkafka)
 
+Instalation
+------------
+```
+git clone git@github.com:ankalagon/phpkafka-example.git
+cd phpkafka-example
+composer install
+```
+
 Usage
 ------------
 ```
