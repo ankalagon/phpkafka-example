@@ -16,5 +16,6 @@ Examples
 -------------
 ```
 php index.php producer --message 'message payload' --topic test_topic  --count 100000
-php index.php consumer --topic test77 --output stdout --wait
+php index.php consumer --topic test_topic --output stdout --wait
+php index.php consumer --topic test_topic --output file --file /tmp/kafka-test.log
 ```
