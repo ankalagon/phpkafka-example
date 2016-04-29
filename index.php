@@ -15,21 +15,26 @@ $cli = new Cli();
 $cli->description('Tool to test Kafka Brokers/Zookeeper from PHP')
     ->command('producer')
     ->description('Initialize producer')
+    ->opt('broker', 'IP of Kafka Broker ie. X.X.X.X:9092,Y.Y.Y.Y:6667', true, 'string')
     ->opt('message', 'Message to put to queue', true, 'string')
     ->opt('count', 'Number of messages to put to queue', false, 'integer')
+    //->opt('vendor', 'Vendor of queue - kafka, redis', false, 'integer')
     ->opt('topic', 'Topic', true, 'string')
 
     ->command('consumer')
     ->description('Initialize consumer')
+    ->opt('broker', 'IP of Kafka Broker ie. X.X.X.X:9092,Y.Y.Y.Y:6667', true, 'string')
     ->opt('output', 'Type of output - stdout, file, raw, none', true, 'string')
     ->opt('file', 'Name of file to write output', false, 'string')
     ->opt('wait', 'Wait for new messages, don\'t kill script after reading all messages', false, 'boolean')
     ->opt('frombeginning', 'Add --from-beginning flag to consumer', false, 'string')
+    //->opt('vendor', 'Vendor of queue - kafka, redis', false, 'integer')
     ->opt('topic', 'Topic', true, 'string');
 
 $args = $cli->parse($argv, true);
 
 $command = $args->getCommand();
+$broker = $args->getOpt('broker');
 
 if ($command == 'producer') {
     $count = $args->getOpt('count', 1);
@@ -38,7 +43,7 @@ if ($command == 'producer') {
 
     $rk = new RdKafka\Producer();
     $rk->setLogLevel(LOG_DEBUG);
-    $rk->addBrokers(BROKER);
+    $rk->addBrokers($broker);
     $topic = $rk->newTopic($args->getOpt('topic'));
 
     $log->begin('starting to insert messages to queue');
@@ -68,7 +73,7 @@ if ($command == 'producer') {
 
     $rk = new RdKafka\Consumer();
     $rk->setLogLevel(LOG_DEBUG);
-    $rk->addBrokers(BROKER);
+    $rk->addBrokers($broker);
     $consumer = $rk->newTopic($topic, $topicConf);
 
     $counter = 0;
@@ -109,6 +114,4 @@ if ($command == 'producer') {
 
     $log->message('end of messages in topic');
     $log->success('Consumed '.$counter.' messaged from topic '.$topic);
-
-
 }
