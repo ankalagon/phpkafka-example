@@ -1,6 +1,12 @@
 {
     "require": {
         "efisuby/php-kafka": "^0.1.8",
-        "vanilla/garden-cli": "^1.6"
+        "vanilla/garden-cli": "^1.6",
+        "predis/predis": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "."
+        ]
     }
 }
